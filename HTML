@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Booth Equipment Checklist</title>
+    <style>
+        :root {
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-gray-400-rgb: 119, 124, 124;
+                --color-teal-300-rgb: 50, 184, 198;
+                --color-gray-300-rgb: 167, 169, 169;
+                --color-gray-200-rgb: 245, 245, 245;
+                --color-background: var(--color-charcoal-700);
+                --color-surface: var(--color-charcoal-800);
+                --color-text: var(--color-gray-200);
+                --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+                --color-primary: var(--color-teal-300);
+                --color-primary-hover: var(--color-teal-400);
+                --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+                --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+                --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+                --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-base);
+            padding: 15px 25px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-top: 5px;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .edit-controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .edit-btn {
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .edit-btn-edit {
+            background: var(--color-secondary);
+            color: var(--color-text);
+        }
+
+        .edit-btn-edit:hover {
+            background: var(--color-secondary-hover);
+        }
+
+        .edit-btn-delete {
+            background: rgba(220, 38, 38, 0.15);
+            color: #dc2626;
+        }
+
+        .edit-btn-delete:hover {
+            background: rgba(220, 38, 38, 0.25);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--color-text);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--color-text);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background: var(--color-background);
+            color: var(--color-text);
+            font-size: 0.95rem;
+            font-family: var(--font-family-base);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--radius-base);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--color-secondary);
+            color: var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-secondary-hover);
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background: var(--color-surface);
+            color: var(--color-text);
+            font-size: 0.95rem;
+        }
+
+        .search-box input:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .category-progress {
+            font-size: 0.875rem;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: var(--radius-base);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .checklist-item:hover {
+            background: var(--color-secondary);
+        }
+
+        .checklist-item.checked {
+            opacity: 0.6;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-surface);
+            transition: all 0.2s;
+        }
+
+        .checkbox.checked {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            color: var(--color-white);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: var(--color-text);
+        }
+
+        .item-description {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .priority-essential {
+            background: rgba(var(--color-teal-500-rgb), 0.15);
+            color: var(--color-primary);
+        }
+
+        .priority-optional {
+            background: var(--color-secondary);
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .action-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📸 Photo Booth Equipment Checklist</h1>
+            <p class="subtitle">Your comprehensive setup checklist for every event</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value" id="totalItems">0</div>
+                <div class="stat-label">Total Items</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="checkedItems">0</div>
+                <div class="stat-label">Packed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="completionRate">0%</div>
+                <div class="stat-label">Complete</div>
+            </div>
+        </div>
+
+        <div class="action-bar">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search equipment...">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-secondary" onclick="addNewItem()">+ Add Item</button>
+                <button class="btn btn-secondary" onclick="resetAll()">Reset All</button>
+                <button class="btn btn-primary" onclick="printChecklist()">Print Checklist</button>
+            </div>
+        </div>
+
+        <div class="categories" id="categoriesContainer"></div>
+    </div>
+
+    <!-- Modal for Add/Edit Item -->
+    <div class="modal" id="itemModal">
+        <div class="modal-content">
+            <h2 class="modal-header" id="modalTitle">Add New Item</h2>
+            <form id="itemForm" onsubmit="saveItem(event)">
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="itemCategory" required>
+                        <option value="">Select category...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Item Name</label>
+                    <input type="text" class="form-input" id="itemName" required placeholder="e.g., Backup Camera">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="itemDescription" required placeholder="Detailed description of the item..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="itemPriority" required>
+                        <option value="essential">Essential</option>
+                        <option value="optional">Optional</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const checklistData = [
+            {
+                category: "Core Equipment",
+                items: [
+                    { name: "Photo Booth Camera (DSLR/Mirrorless)", description: "Canon R100, Canon EOS Rebel, or similar professional camera", priority: "essential" },
+                    { name: "Camera Tripod & Mount", description: "Sturdy tripod with adjustable height and stable base", priority: "essential" },
+                    { name: "iPad/Tablet/Surface Pro", description: "For touchscreen interface and photo booth software", priority: "essential" },
+                    { name: "Photo Booth Shell/Enclosure", description: "Protective casing with display (if using enclosed booth)", priority: "optional" },
+                    { name: "Laptop/Computer", description: "For running photo booth software and processing", priority: "essential" }
+                ]
+            },
+            {
+                category: "Lighting & Camera Accessories",
+                items: [
+                    { name: "Ring Light or Softbox", description: "Professional lighting for well-lit, flattering photos", priority: "essential" },
+                    { name: "LED Panel Lights", description: "Additional lighting for proper illumination", priority: "optional" },
+                    { name: "Strobe Flash Unit", description: "External flash with beauty dish attachment", priority: "optional" },
+                    { name: "Camera Lens Cap", description: "Protection for camera lens during transport", priority: "essential" },
+                    { name: "Extra Camera Batteries", description: "Fully charged backup batteries", priority: "essential" },
+                    { name: "Memory Cards", description: "Formatted and tested SD cards with sufficient capacity", priority: "essential" }
+                ]
+            },
+            {
+                category: "Printing Equipment",
+                items: [
+                    { name: "Dye-Sublimation Printer", description: "Canon SELPHY or similar professional photo printer", priority: "essential" },
+                    { name: "Photo Paper/Print Media", description: "Enough for maximum shots plus 20% buffer", priority: "essential" },
+                    { name: "Printer Ink Cartridges", description: "Backup cartridges for printer", priority: "essential" },
+                    { name: "Printer Stool/Stand", description: "Stable surface for printer setup", priority: "essential" },
+                    { name: "Printer USB Cable", description: "Connection cable between printer and computer", priority: "essential" }
+                ]
+            },
+            {
+                category: "Backdrop & Display",
+                items: [
+                    { name: "Backdrop Stand/Frame", description: "Atlas stand, pipe and drape, or similar support system", priority: "essential" },
+                    { name: "Backdrop Fabric", description: "Client-confirmed choice - sequin, fabric, or custom", priority: "essential" },
+                    { name: "Backdrop Base Weights", description: "Heavy bases for stability (for sequin backdrops)", priority: "optional" },
+                    { name: "Backdrop Poles & Crossbars", description: "All poles cleaned and checked for damage", priority: "essential" },
+                    { name: "Backdrop Clips/Clamps", description: "For securing backdrop fabric", priority: "essential" }
+                ]
+            },
+            {
+                category: "Props & Accessories",
+                items: [
+                    { name: "Props Collection", description: "Fun props appropriate for event theme", priority: "essential" },
+                    { name: "Props Display Stand/Table", description: "Folding table for organizing props", priority: "optional" },
+                    { name: "Scrapbook & Adhesive", description: "Guest book with pens and glue for memories", priority: "optional" },
+                    { name: "Photo Frames/Magnets", description: "Additional ordered items per client request", priority: "optional" },
+                    { name: "Signage & Directional Signs", description: "Custom signs directing guests to photo booth", priority: "optional" }
+                ]
+            },
+            {
+                category: "Power & Cables",
+                items: [
+                    { name: "Extension Cords", description: "Heavy-duty cords with sufficient length (check venue layout)", priority: "essential" },
+                    { name: "Surge Protector/Power Strip", description: "Checked for damage with multiple outlets", priority: "essential" },
+                    { name: "Portable Power Station", description: "Battery backup for outdoor events (4-6 hour capacity)", priority: "optional" },
+                    { name: "Power Adapters", description: "Camera and device power adapters", priority: "essential" },
+                    { name: "USB Cables", description: "Various USB connections for devices", priority: "essential" },
+                    { name: "Cable Ties & Organizers", description: "For neat cable management", priority: "optional" }
+                ]
+            },
+            {
+                category: "Transport & Setup Tools",
+                items: [
+                    { name: "Dolly/Rolling Cart", description: "With bungee straps for secure transport", priority: "essential" },
+                    { name: "Equipment Cases", description: "Hard cases for camera, printer, and delicate equipment", priority: "essential" },
+                    { name: "Storage Bins", description: "Labeled bins for organized equipment transport", priority: "essential" },
+                    { name: "Tool Kit", description: "Allen wrenches, screwdrivers, crescent wrench", priority: "essential" },
+                    { name: "Gaffer Tape", description: "For securing cables and temporary fixes", priority: "essential" },
+                    { name: "Scissors", description: "For various setup needs", priority: "optional" }
+                ]
+            },
+            {
+                category: "Cleaning & Maintenance",
+                items: [
+                    { name: "Microfiber Cloths", description: "For cleaning camera lens and equipment", priority: "essential" },
+                    { name: "Cleaning Wipes", description: "For surfaces and equipment maintenance", priority: "essential" },
+                    { name: "Lens Cleaning Solution", description: "Proper camera lens cleaner", priority: "optional" },
+                    { name: "Emergency Repair Kit", description: "Spare cables, batteries, small tools", priority: "optional" }
+                ]
+            },
+            {
+                category: "Documentation & Business",
+                items: [
+                    { name: "Run Sheet/Event Details", description: "Printed event schedule and setup instructions", priority: "essential" },
+                    { name: "Emergency Contact List", description: "Client and venue emergency contacts", priority: "essential" },
+                    { name: "Business Cards", description: "Professional cards in holder for networking", priority: "optional" },
+                    { name: "Contract/Invoice Copy", description: "Printed copy of agreement and payment terms", priority: "essential" },
+                    { name: "Insurance Documents", description: "Liability insurance proof if required", priority: "optional" }
+                ]
+            }
+        ];
+
+        let checkedState = {};
+        let editingItem = null;
+
+        function initializeChecklist() {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = '';
+
+            checklistData.forEach((category, categoryIndex) => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card';
+                categoryCard.dataset.category = category.category;
+
+                const checkedCount = category.items.filter((item, itemIndex) => 
+                    checkedState[`${categoryIndex}-${itemIndex}`]
+                ).length;
+                const totalCount = category.items.length;
+
+                categoryCard.innerHTML = `
+                    <div class="category-header">
+                        <h2 class="category-title">${category.category}</h2>
+                        <span class="category-progress">${checkedCount}/${totalCount}</span>
+                    </div>
+                    <div class="checklist-items">
+                        ${category.items.map((item, itemIndex) => {
+                            const itemId = `${categoryIndex}-${itemIndex}`;
+                            const isChecked = checkedState[itemId] || false;
+                            return `
+                                <div class="checklist-item ${isChecked ? 'checked' : ''}">
+                                    <div class="checkbox ${isChecked ? 'checked' : ''}" id="checkbox-${itemId}" onclick="toggleItem('${itemId}')"></div>
+                                    <div class="item-content" onclick="toggleItem('${itemId}')" style="cursor: pointer;">
+                                        <div class="item-name">
+                                            ${item.name}
+                                            <span class="priority-badge priority-${item.priority}">${item.priority}</span>
+                                        </div>
+                                        <div class="item-description">${item.description}</div>
+                                        <div class="edit-controls">
+                                            <button class="edit-btn edit-btn-edit" onclick="event.stopPropagation(); editItem(${categoryIndex}, ${itemIndex})">Edit</button>
+                                            <button class="edit-btn edit-btn-delete" onclick="event.stopPropagation(); deleteItem(${categoryIndex}, ${itemIndex})">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+
+                container.appendChild(categoryCard);
+            });
+
+            updateStats();
+        }
+
+        function toggleItem(itemId) {
+            checkedState[itemId] = !checkedState[itemId];
+            initializeChecklist();
+        }
+
+        function updateStats() {
+            const totalItems = checklistData.reduce((sum, cat) => sum + cat.items.length, 0);
+            const checkedItems = Object.values(checkedState).filter(Boolean).length;
+            const completionRate = totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0;
+
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('checkedItems').textContent = checkedItems;
+            document.getElementById('completionRate').textContent = `${completionRate}%`;
+        }
+
+        function resetAll() {
+            if (confirm('Are you sure you want to reset all checkboxes? This will uncheck all items.')) {
+                checkedState = {};
+                initializeChecklist();
+            }
+        }
+
+        function printChecklist() {
+            window.print();
+        }
+
+        function addNewItem() {
+            editingItem = null;
+            document.getElementById('modalTitle').textContent = 'Add New Item';
+            document.getElementById('itemForm').reset();
+            populateCategoryDropdown();
+            document.getElementById('itemModal').classList.add('active');
+        }
+
+        function editItem(categoryIndex, itemIndex) {
+            editingItem = { categoryIndex, itemIndex };
+            const item = checklistData[categoryIndex].items[itemIndex];
+            
+            document.getElementById('modalTitle').textContent = 'Edit Item';
+            document.getElementById('itemName').value = item.name;
+            document.getElementById('itemDescription').value = item.description;
+            document.getElementById('itemPriority').value = item.priority;
+            
+            populateCategoryDropdown();
+            document.getElementById('itemCategory').value = checklistData[categoryIndex].category;
+            
+            document.getElementById('itemModal').classList.add('active');
+        }
+
+        function deleteItem(categoryIndex, itemIndex) {
+            const item = checklistData[categoryIndex].items[itemIndex];
+            if (confirm(`Are you sure you want to delete "${item.name}"?`)) {
+                checklistData[categoryIndex].items.splice(itemIndex, 1);
+                
+                // Remove empty categories
+                if (checklistData[categoryIndex].items.length === 0) {
+                    checklistData.splice(categoryIndex, 1);
+                }
+                
+                // Clean up checked state
+                const oldItemId = `${categoryIndex}-${itemIndex}`;
+                delete checkedState[oldItemId];
+                
+                initializeChecklist();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('itemModal').classList.remove('active');
+            editingItem = null;
+        }
+
+        function populateCategoryDropdown() {
+            const select = document.getElementById('itemCategory');
+            select.innerHTML = '<option value="">Select category...</option>';
+            
+            checklistData.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat.category;
+                option.textContent = cat.category;
+                select.appendChild(option);
+            });
+            
+            const newOption = document.createElement('option');
+            newOption.value = '__new__';
+            newOption.textContent = '+ Create New Category';
+            select.appendChild(newOption);
+        }
+
+        function saveItem(event) {
+            event.preventDefault();
+            
+            let categoryName = document.getElementById('itemCategory').value;
+            const itemName = document.getElementById('itemName').value;
+            const itemDescription = document.getElementById('itemDescription').value;
+            const itemPriority = document.getElementById('itemPriority').value;
+            
+            if (categoryName === '__new__') {
+                categoryName = prompt('Enter new category name:');
+                if (!categoryName) return;
+            }
+            
+            const newItem = {
+                name: itemName,
+                description: itemDescription,
+                priority: itemPriority
+            };
+            
+            if (editingItem !== null) {
+                // Update existing item
+                const { categoryIndex, itemIndex } = editingItem;
+                const oldCategory = checklistData[categoryIndex].category;
+                
+                if (oldCategory !== categoryName) {
+                    // Moving to different category
+                    checklistData[categoryIndex].items.splice(itemIndex, 1);
+                    if (checklistData[categoryIndex].items.length === 0) {
+                        checklistData.splice(categoryIndex, 1);
+                    }
+                    
+                    let targetCategory = checklistData.find(cat => cat.category === categoryName);
+                    if (!targetCategory) {
+                        targetCategory = { category: categoryName, items: [] };
+                        checklistData.push(targetCategory);
+                    }
+                    targetCategory.items.push(newItem);
+                } else {
+                    // Same category, just update
+                    checklistData[categoryIndex].items[itemIndex] = newItem;
+                }
+            } else {
+                // Add new item
+                let targetCategory = checklistData.find(cat => cat.category === categoryName);
+                if (!targetCategory) {
+                    targetCategory = { category: categoryName, items: [] };
+                    checklistData.push(targetCategory);
+                }
+                targetCategory.items.push(newItem);
+            }
+            
+            closeModal();
+            initializeChecklist();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const categories = document.querySelectorAll('.category-card');
+
+            categories.forEach(category => {
+                const items = category.querySelectorAll('.checklist-item');
+                let visibleItems = 0;
+
+                items.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.classList.remove('hidden');
+                        visibleItems++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+
+                if (visibleItems === 0 && searchTerm !== '') {
+                    category.classList.add('hidden');
+                } else {
+                    category.classList.remove('hidden');
+                }
+            });
+        });
+
+        initializeChecklist();
+    </script>
+</body>
+</html>
